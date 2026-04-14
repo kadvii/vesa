@@ -1,0 +1,119 @@
+##########################################################
+# eVisa Platform — .gitignore
+# ASP.NET Core / Clean Architecture / Entity Framework Core
+##########################################################
+
+# ─── Build Output ─────────────────────────────────────
+[Bb]in/
+[Oo]bj/
+out/
+build/
+publish/
+
+# ─── Temporary / Scratch Files ────────────────────────
+*.log
+*.tmp
+*.temp
+*.swp
+*.bak
+build_*.txt
+build_*.log
+err*.log
+error_msg.txt
+
+# ─── Secrets & Configuration ──────────────────────────
+# !! IMPORTANT: appsettings.json may contain DB connection
+#    strings, JWT secrets, and API keys. Keep it out of git.
+**/appsettings.json
+**/appsettings.*.json
+
+# Keep only the example template (safe to commit)
+!**/appsettings.example.json
+!**/appsettings.Development.example.json
+
+# User secrets
+**/*.pfx
+**/*.key
+**/*.p12
+**/*secrets*.json
+secrets.json
+
+# ─── Visual Studio ────────────────────────────────────
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# ─── Visual Studio Code ───────────────────────────────
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# ─── Rider / JetBrains ────────────────────────────────
+.idea/
+*.sln.iml
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ─── NuGet ────────────────────────────────────────────
+*.nupkg
+*.snupkg
+**/[Pp]ackages/
+!**/[Pp]ackages/build/
+nuget.config
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ─── Entity Framework Migrations auto-generated ───────
+# Comment out the next line if you want to commit migrations
+# **/Migrations/
+
+# ─── Test Results ────────────────────────────────────
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+[Rr]eleaseCandidate*/
+*.coveragexml
+*.coverage
+coverage/
+coverage.json
+*.trx
+
+# ─── Publish / Deployment ────────────────────────────
+**/publish/
+**/PublishProfiles/
+launchSettings.json
+web.config
+
+# ─── Docker ──────────────────────────────────────────
+# Uncomment if you don't want to commit Docker files:
+# Dockerfile
+# docker-compose*.yml
+# .dockerignore
+
+# ─── OS Generated ────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ─── Node (if any frontend tooling is added) ─────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

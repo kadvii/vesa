@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/eVisaPlatform.API/eVisaPlatform.API.csproj" />
+    <Project Path="src/eVisaPlatform.Application/eVisaPlatform.Application.csproj" />
+    <Project Path="src/eVisaPlatform.Domain/eVisaPlatform.Domain.csproj" />
+    <Project Path="src/eVisaPlatform.Infrastructure/eVisaPlatform.Infrastructure.csproj" />
+  </Folder>
+</Solution>
