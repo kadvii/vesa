@@ -95,7 +95,7 @@ public class SettingsController : ControllerBase
             Key         = key,
             Value       = dto.Name.Trim(),
             Description = dto.Description,
-            IsPublic    = true,
+            IsPublic    = dto.IsActive,
         }, CurrentUserEmail);
 
         return CreatedAtAction(nameof(GetCountries), MapCountry(setting));
@@ -113,7 +113,7 @@ public class SettingsController : ControllerBase
         {
             Value       = dto.Name.Trim(),
             Description = dto.Description,
-            IsPublic    = true,
+            IsPublic    = dto.IsActive,
         }, CurrentUserEmail);
 
         return Ok(MapCountry(setting));
@@ -188,6 +188,63 @@ public class SettingsController : ControllerBase
         return NoContent();
     }
 
+    // ══════════════════════════════════════════════════════════════════════════
+    //  REQUIRED DOCUMENTS  —  /api/reqdocs
+    //  Each record: key = "reqdoc:{slug}"
+    // ══════════════════════════════════════════════════════════════════════════
+
+    [HttpGet("api/reqdocs")]
+    [Authorize]
+    public async Task<IActionResult> GetReqDocs()
+    {
+        var items  = await _settingService.GetByPrefixAsync("reqdoc:", IsAdmin);
+        var result = items.Select(MapReqDoc);
+        return Ok(result);
+    }
+
+    [HttpPost("api/reqdocs")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> CreateReqDoc([FromBody] ReqDocUpsertDto dto)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        var key = $"reqdoc:{dto.Slug.Trim().ToLowerInvariant()}";
+        var setting = await _settingService.CreateAsync(new CreateSettingDto
+        {
+            Key         = key,
+            Value       = dto.Name.Trim(),
+            Description = dto.Description,
+            IsPublic    = dto.IsMandatory,
+        }, CurrentUserEmail);
+
+        return CreatedAtAction(nameof(GetReqDocs), MapReqDoc(setting));
+    }
+
+    [HttpPut("api/reqdocs/{slug}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateReqDoc(string slug, [FromBody] ReqDocUpsertDto dto)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        var key = $"reqdoc:{slug.Trim().ToLowerInvariant()}";
+        var setting = await _settingService.UpdateAsync(key, new UpdateSettingDto
+        {
+            Value       = dto.Name.Trim(),
+            Description = dto.Description,
+            IsPublic    = dto.IsMandatory,
+        }, CurrentUserEmail);
+
+        return Ok(MapReqDoc(setting));
+    }
+
+    [HttpDelete("api/reqdocs/{id:guid}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeleteReqDoc(Guid id)
+    {
+        await _settingService.DeleteAsync(id);
+        return NoContent();
+    }
+
     // ── Projection helpers ────────────────────────────────────────────────────
     private static CountryResponseDto MapCountry(SettingResponseDto s) => new()
     {
@@ -195,6 +252,7 @@ public class SettingsController : ControllerBase
         IsoCode     = s.Key.Replace("country:", "", StringComparison.OrdinalIgnoreCase).ToUpperInvariant(),
         Name        = s.Value,
         Description = s.Description,
+        IsActive    = s.IsPublic,
         UpdatedAt   = s.UpdatedAt,
     };
 
@@ -204,6 +262,16 @@ public class SettingsController : ControllerBase
         IsoCode     = s.Key.Replace("price:", "", StringComparison.OrdinalIgnoreCase).ToUpperInvariant(),
         AmountUsd   = decimal.TryParse(s.Value, out var d) ? d : 0,
         Description = s.Description,
+        UpdatedAt   = s.UpdatedAt,
+    };
+
+    private static ReqDocResponseDto MapReqDoc(SettingResponseDto s) => new()
+    {
+        Id          = s.Id,
+        Slug        = s.Key.Replace("reqdoc:", "", StringComparison.OrdinalIgnoreCase).ToLowerInvariant(),
+        Name        = s.Value,
+        Description = s.Description,
+        IsMandatory = s.IsPublic,
         UpdatedAt   = s.UpdatedAt,
     };
 }
@@ -220,6 +288,8 @@ public class CountryUpsertDto
 
     [System.ComponentModel.DataAnnotations.MaxLength(500)]
     public string? Description { get; set; }
+
+    public bool IsActive { get; set; } = true;
 }
 
 public class PriceUpsertDto
@@ -240,6 +310,7 @@ public class CountryResponseDto
     public string IsoCode { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
+    public bool IsActive { get; set; }
     public DateTime UpdatedAt { get; set; }
 }
 
@@ -249,5 +320,29 @@ public class PriceResponseDto
     public string  IsoCode { get; set; } = string.Empty;
     public decimal AmountUsd { get; set; }
     public string? Description { get; set; }
+    public DateTime UpdatedAt { get; set; }
+}
+
+public class ReqDocUpsertDto
+{
+    [System.ComponentModel.DataAnnotations.Required, System.ComponentModel.DataAnnotations.MaxLength(50)]
+    public string Slug { get; set; } = string.Empty;   // e.g. "passport", "bank-statement"
+
+    [System.ComponentModel.DataAnnotations.Required, System.ComponentModel.DataAnnotations.MaxLength(200)]
+    public string Name { get; set; } = string.Empty;   // e.g. "صورة الجواز"
+
+    [System.ComponentModel.DataAnnotations.MaxLength(500)]
+    public string? Description { get; set; }
+
+    public bool IsMandatory { get; set; } = true;
+}
+
+public class ReqDocResponseDto
+{
+    public Guid Id { get; set; }
+    public string Slug { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
+    public bool IsMandatory { get; set; }
     public DateTime UpdatedAt { get; set; }
 }

@@ -488,4 +488,94 @@ export async function pollPaymentStatus(paymentId) {
   }
 }
 
+// ── Countries Settings (Admin) ──────────────────────────────────────────────
+
+export async function getCountries() {
+  const { data } = await client.get('/api/countries').catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function createCountry(isoCode, name, description = '', isActive = true) {
+  const { data } = await client.post('/api/countries', { isoCode, name, description, isActive }).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function updateCountry(isoCode, name, description = '', isActive = true) {
+  const { data } = await client.put(`/api/countries/${isoCode}`, { isoCode, name, description, isActive }).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function deleteCountry(id) {
+  const { data } = await client.delete(`/api/countries/${id}`).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+// ── Pricing Settings (Admin) ────────────────────────────────────────────────
+
+export async function getPrices() {
+  const { data } = await client.get('/api/prices').catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function createPrice(isoCode, amountUsd, description = '') {
+  const { data } = await client.post('/api/prices', { isoCode, amountUsd, description }).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function updatePrice(isoCode, amountUsd, description = '') {
+  const { data } = await client.put(`/api/prices/${isoCode}`, { isoCode, amountUsd, description }).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function deletePrice(id) {
+  const { data } = await client.delete(`/api/prices/${id}`).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+// ── Required Documents Settings (Admin) ─────────────────────────────────────
+
+export async function getRequiredDocs() {
+  const { data } = await client.get('/api/reqdocs').catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function createRequiredDoc(slug, name, description = '', isMandatory = true) {
+  const { data } = await client.post('/api/reqdocs', { slug, name, description, isMandatory }).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function updateRequiredDoc(slug, name, description = '', isMandatory = true) {
+  const { data } = await client.put(`/api/reqdocs/${slug}`, { slug, name, description, isMandatory }).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
+export async function deleteRequiredDoc(id) {
+  const { data } = await client.delete(`/api/reqdocs/${id}`).catch(e => {
+    throw new Error(axios.isAxiosError(e) ? messageFromAxiosError(e) : e.message);
+  });
+  return data?.data ?? data;
+}
+
 export default client;
