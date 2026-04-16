@@ -212,6 +212,22 @@ export const api = {
         throw err;
       }
     },
+
+    /**
+     * Invalidates the refresh token on the backend.
+     * Maps to POST /api/auth/logout  (Bearer token in header is enough;
+     * we also send the refresh token so the server can revoke it from the DB).
+     * @returns {Promise<void>}
+     */
+    async logout() {
+      const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+      try {
+        await client.post('/api/auth/logout', { refreshToken });
+      } catch (err) {
+        // Surface non-Axios errors in dev; swallow 4xx/5xx — caller handles cleanup.
+        if (!axios.isAxiosError(err)) throw err;
+      }
+    },
   },
 
   admin: {

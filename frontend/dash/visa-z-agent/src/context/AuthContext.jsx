@@ -43,9 +43,16 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    clearAuthStorage();
+  const logout = async () => {
+    try {
+      await api.auth.logout();
+    } catch (err) {
+      // Server-side revocation failed — still clear local state so the user is logged out.
+      console.warn('Logout API call failed (token may already be invalid):', err?.message);
+    } finally {
+      setUser(null);
+      clearAuthStorage();
+    }
   };
 
   const value = useMemo(
