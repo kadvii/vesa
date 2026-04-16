@@ -33,7 +33,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isEmailOrPhone(form.identifier)) {
-      setError('أدخل بريدًا إلكترونيًا أو رقم هاتف صحيح.');
+      setError('أدخل بريداً إلكترونياً أو رقم هاتف صحيح.');
       return;
     }
     if (!form.password || form.password.length < 6) {
@@ -68,7 +68,7 @@ export default function Login() {
               </div>
             </div>
             <p className="text-sm leading-relaxed text-beige/80">
-              منصة موحدة لإدارة الفيزا الإلكترونية وحجز الدولار بخطوات بسيطة وبواجهة حكومية عصرية.
+              منصة موحدة لإدارة الفيزا الإلكترونية وحجز الدولار بخطوات بسيطة وواجهة حكومية عصرية.
             </p>
             <div className="grid gap-3 text-sm text-beige/80 sm:grid-cols-2">
               <Highlight title="هوية رقمية" text="تسجيل عبر البريد أو الهاتف." />

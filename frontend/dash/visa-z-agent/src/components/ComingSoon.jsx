@@ -45,7 +45,7 @@ export default function ComingSoon({ children, label = 'هذه الصفحة', di
               boxShadow: '0 0 0 0 rgba(212,175,55,0.5)',
             }}
           >
-            🕐
+            ⏳
           </div>
 
           <div style={{ textAlign: 'center', direction: 'rtl' }}>
@@ -62,7 +62,7 @@ export default function ComingSoon({ children, label = 'هذه الصفحة', di
               قريباً
             </h2>
             <p style={{ color: '#c8b89a', fontSize: '14px', marginTop: '6px' }}>
-              {label} — جارٍ التطوير، تابعنا قريباً!
+              {label} — جاري التطوير، تابعنا قريباً!
             </p>
           </div>
 

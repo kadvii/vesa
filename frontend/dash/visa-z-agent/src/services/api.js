@@ -6,7 +6,7 @@ export const REFRESH_TOKEN_KEY = 'drs_refresh_token';
 export const USER_STORAGE_KEY = 'drs_user';
 
 const baseURL =
-  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '') || 'https://localhost:7022';
+  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '') || 'http://localhost:5201';
 
 const client = axios.create({
   baseURL,
@@ -37,7 +37,7 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
-// ── 401 interceptor: try refresh before giving up ────────────────────────────
+// â”€â”€ 401 interceptor: try refresh before giving up â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let _isRefreshing = false;
 let _refreshQueue = []; // [{resolve, reject}] waiting for the new token
 
@@ -120,7 +120,7 @@ function messageFromAxiosError(error) {
   if (typeof body === 'string') return body;
   if (body?.message) return body.message;
   if (Array.isArray(body?.errors) && body.errors.length) return body.errors.join(' ');
-  return error.message || 'طلب غير ناجح';
+  return error.message || 'Ø·Ù„Ø¨ ØºÙŠØ± Ù†Ø§Ø¬Ø­';
 }
 
 const visaTypeMap = {
@@ -133,12 +133,12 @@ const visaTypeMap = {
 };
 
 const visaTypeLabelAr = {
-  Tourist: 'سياحية',
-  Business: 'أعمال',
-  Student: 'دراسية',
-  Work: 'عمل',
-  Transit: 'عبور',
-  Medical: 'علاجية',
+  Tourist: 'Ø³ÙŠØ§Ø­ÙŠØ©',
+  Business: 'Ø£Ø¹Ù…Ø§Ù„',
+  Student: 'Ø¯Ø±Ø§Ø³ÙŠØ©',
+  Work: 'Ø¹Ù…Ù„',
+  Transit: 'Ø¹Ø¨ÙˆØ±',
+  Medical: 'Ø¹Ù„Ø§Ø¬ÙŠØ©',
 };
 
 /** Parses "Tag: value" segments produced by the API (ComposeApplicationNotes). */
@@ -153,7 +153,7 @@ function parseNoteTag(notes, tag) {
 /**
  * Maps API `VisaApplicationResponseDto` (camelCase JSON) to the list card shape.
  * @param {object} dto
- * @param {string} [fallbackCountry] — e.g. right after create from the form
+ * @param {string} [fallbackCountry] â€” e.g. right after create from the form
  */
 function mapVisaDtoToCard(dto, fallbackCountry = '') {
   const travelFromNotes = parseNoteTag(dto.notes, 'Travel date');
@@ -191,7 +191,7 @@ export const api = {
         });
 
         if (!data?.success || !data.data) {
-          throw new Error(data?.message || 'بيانات الدخول غير صحيحة');
+          throw new Error(data?.message || 'Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø¯Ø®ÙˆÙ„ ØºÙŠØ± ØµØ­ÙŠØ­Ø©');
         }
 
         const d = data.data;
@@ -224,7 +224,7 @@ export const api = {
       try {
         await client.post('/api/auth/logout', { refreshToken });
       } catch (err) {
-        // Surface non-Axios errors in dev; swallow 4xx/5xx — caller handles cleanup.
+        // Surface non-Axios errors in dev; swallow 4xx/5xx â€” caller handles cleanup.
         if (!axios.isAxiosError(err)) throw err;
       }
     },
@@ -232,7 +232,7 @@ export const api = {
 
   admin: {
     /**
-     * Paginated list of all visa applications (Admin JWT only — matches GET /api/visa).
+     * Paginated list of all visa applications (Admin JWT only â€” matches GET /api/visa).
      * @param {number} [page]
      * @param {number} [pageSize]
      */
@@ -253,7 +253,7 @@ export const api = {
         status: row.status,
         submissionDate: row.submissionDate,
         notes: row.notes,
-        // Fix #6: structured field — no longer need to parse from Notes string
+        // Fix #6: structured field â€” no longer need to parse from Notes string
         destination: row.destinationCountry || parseNoteTag(row.notes, 'Destination'),
         nationality: row.nationality || '',
         intendedTravelDate: row.intendedTravelDate || '',
@@ -305,7 +305,7 @@ export const api = {
     },
 
     /**
-     * Unified PATCH → /api/visa/{id}/status  (Admin JWT only — new endpoint).
+     * Unified PATCH â†’ /api/visa/{id}/status  (Admin JWT only â€” new endpoint).
      * Preferred over updateVisaStatus for new UI code.
      * @param {string} id  Guid string
      * @param {'Approved'|'Rejected'} status
@@ -350,7 +350,7 @@ export async function getReservations(userEmail) {
 
 export async function createVisa(payload) {
   const visaType = visaTypeMap[payload.type] ?? 1;
-  /** Mirrors `CreateVisaApplicationDto` (ASP.NET binds JSON camelCase → PascalCase). */
+  /** Mirrors `CreateVisaApplicationDto` (ASP.NET binds JSON camelCase â†’ PascalCase). */
   const body = {
     visaType,
     destinationCountry: payload.country?.trim() || undefined,
@@ -365,7 +365,7 @@ export async function createVisa(payload) {
   });
 
   if (data && data.success === false) {
-    throw new Error(data.message || 'تعذر إنشاء الطلب');
+    throw new Error(data.message || 'ØªØ¹Ø°Ø± Ø¥Ù†Ø´Ø§Ø¡ Ø§Ù„Ø·Ù„Ø¨');
   }
 
   const dto = data?.data ?? data;
@@ -378,7 +378,7 @@ export async function getVisas(_userEmail) {
   });
 
   if (data && data.success === false) {
-    throw new Error(data.message || 'تعذر تحميل الطلبات');
+    throw new Error(data.message || 'ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ø·Ù„Ø¨Ø§Øª');
   }
 
   const page = data?.data ?? data;
@@ -387,7 +387,7 @@ export async function getVisas(_userEmail) {
 }
 
 /**
- * GET /api/visa/stats — aggregated counts for dashboard cards.
+ * GET /api/visa/stats â€” aggregated counts for dashboard cards.
  * Requires Admin or Employee JWT.
  * @returns {Promise<{ total: number, pending: number, approved: number, rejected: number }>}
  */
@@ -403,13 +403,13 @@ export async function getVisaStats() {
  * Upload a passport scan (or any document) for a visa application.
  * Maps to POST /api/documents/upload  (multipart/form-data).
  *
- * @param {File}   file            — the File object from the <input type="file">
- * @param {string} applicationId   — Guid returned by createVisa()
- * @param {number} [fileType=1]    — DocumentType enum: 1=Passport, 2=Photo, 3=SupportingDocument
- * @returns {Promise<object>}      — { id, applicationId, fileName, filePath, fileType, uploadedAt }
+ * @param {File}   file            â€” the File object from the <input type="file">
+ * @param {string} applicationId   â€” Guid returned by createVisa()
+ * @param {number} [fileType=1]    â€” DocumentType enum: 1=Passport, 2=Photo, 3=SupportingDocument
+ * @returns {Promise<object>}      â€” { id, applicationId, fileName, filePath, fileType, uploadedAt }
  */
 export async function uploadPassportDocument(file, applicationId, fileType = 1) {
-  // Build FormData — axios automatically sets multipart/form-data + boundary
+  // Build FormData â€” axios automatically sets multipart/form-data + boundary
   const form = new FormData();
   form.append('File', file);               // must match [FromForm] field name on the backend
   form.append('ApplicationId', applicationId);
@@ -417,12 +417,12 @@ export async function uploadPassportDocument(file, applicationId, fileType = 1) 
 
   try {
     const { data } = await client.post('/api/documents/upload', form, {
-      // Do NOT set Content-Type here — axios adds it with the correct boundary
+      // Do NOT set Content-Type here â€” axios adds it with the correct boundary
       headers: { 'Content-Type': undefined },
     });
 
     if (data && data.success === false) {
-      throw new Error(data.message || 'تعذر رفع المستند');
+      throw new Error(data.message || 'ØªØ¹Ø°Ø± Ø±ÙØ¹ Ø§Ù„Ù…Ø³ØªÙ†Ø¯');
     }
 
     return data?.data ?? data;
@@ -432,10 +432,10 @@ export async function uploadPassportDocument(file, applicationId, fileType = 1) 
   }
 }
 
-// ── Payment Gateway Integration ───────────────────────────────────────────────
+// â”€â”€ Payment Gateway Integration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /**
- * Phase 1 — Initiate a checkout session.
+ * Phase 1 â€” Initiate a checkout session.
  * Maps to POST /api/payments/checkout
  *
  * @param {{ applicationId: string, amount: number, currency?: string, method?: number }} payload
@@ -452,7 +452,7 @@ export async function initiateCheckout(payload) {
       notes:         payload.notes    ?? null,
     });
     if (data && data.success === false)
-      throw new Error(data.message || 'تعذر بدء عملية الدفع');
+      throw new Error(data.message || 'ØªØ¹Ø°Ø± Ø¨Ø¯Ø¡ Ø¹Ù…Ù„ÙŠØ© Ø§Ù„Ø¯ÙØ¹');
     return data?.data ?? data;
   } catch (e) {
     if (axios.isAxiosError(e)) throw new Error(messageFromAxiosError(e));
@@ -461,11 +461,11 @@ export async function initiateCheckout(payload) {
 }
 
 /**
- * Phase 2 — Confirm payment via the simulated webhook.
+ * Phase 2 â€” Confirm payment via the simulated webhook.
  * In production the payment gateway calls this directly; in dev the frontend calls it
  * after the user "completes" the checkout modal.
  *
- * Maps to POST /api/payments/webhook/confirm  (no JWT required — auth via sessionToken)
+ * Maps to POST /api/payments/webhook/confirm  (no JWT required â€” auth via sessionToken)
  *
  * @param {{ paymentId: string, sessionToken: string, status: 'Paid'|'Failed', gatewayReference?: string }} payload
  * @returns {Promise<PaymentResponseDto>}
@@ -479,7 +479,7 @@ export async function confirmPayment(payload) {
       gatewayReference: payload.gatewayReference ?? null,
     });
     if (data && data.success === false)
-      throw new Error(data.message || 'فشل تأكيد الدفع');
+      throw new Error(data.message || 'ÙØ´Ù„ ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø¯ÙØ¹');
     return data?.data ?? data;
   } catch (e) {
     if (axios.isAxiosError(e)) throw new Error(messageFromAxiosError(e));
@@ -504,7 +504,7 @@ export async function pollPaymentStatus(paymentId) {
   }
 }
 
-// ── Countries Settings (Admin) ──────────────────────────────────────────────
+// â”€â”€ Countries Settings (Admin) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function getCountries() {
   const { data } = await client.get('/api/countries').catch(e => {
@@ -534,7 +534,7 @@ export async function deleteCountry(id) {
   return data?.data ?? data;
 }
 
-// ── Pricing Settings (Admin) ────────────────────────────────────────────────
+// â”€â”€ Pricing Settings (Admin) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function getPrices() {
   const { data } = await client.get('/api/prices').catch(e => {
@@ -564,7 +564,7 @@ export async function deletePrice(id) {
   return data?.data ?? data;
 }
 
-// ── Required Documents Settings (Admin) ─────────────────────────────────────
+// â”€â”€ Required Documents Settings (Admin) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function getRequiredDocs() {
   const { data } = await client.get('/api/reqdocs').catch(e => {

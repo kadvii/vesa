@@ -52,7 +52,7 @@ export default function Bookings() {
 
         {/* States */}
         {loading && (
-          <p className="py-6 text-center text-sm text-beige/60">جارٍ التحميل…</p>
+          <p className="py-6 text-center text-sm text-beige/60">جارِ التحميل…</p>
         )}
 
         {!loading && error && (

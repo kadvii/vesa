@@ -152,7 +152,7 @@ export default function Countries() {
                 <th className="px-6 py-4 font-semibold w-48">الاسم (عربي)</th>
                 <th className="px-6 py-4 font-semibold">تفاصيل</th>
                 <th className="px-6 py-4 font-semibold text-center w-32">الحالة</th>
-                <th className="px-6 py-4 font-semibold text-center w-40">إجراءات</th>
+                <th className="px-6 py-4 font-semibold text-center w-40">العمليات</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-beige/10">
@@ -254,7 +254,7 @@ export default function Countries() {
                   className="w-4 h-4 accent-brand cursor-pointer"
                 />
                 <label htmlFor="isActiveToggle" className="text-sm text-beige cursor-pointer select-none">
-                  Дولة متاحة لاستقبال الطلبات (مفعلة)
+                  دولة متاحة لاستقبال الطلبات (مفعلة)
                 </label>
               </div>
 

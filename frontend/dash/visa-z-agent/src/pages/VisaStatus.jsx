@@ -5,7 +5,7 @@ import CheckoutModal from '../components/CheckoutModal';
 import { getVisas, initiateCheckout } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
-// ── Status display config ─────────────────────────────────────────────────────
+// ── Status display config ────────────────────────────────────────────────────
 const STATUS_META = {
   Pending:        { label: 'قيد المراجعة',     color: '#facc15', dot: '#facc15', icon: '⏳' },
   UnderReview:    { label: 'تحت المراجعة',      color: '#60a5fa', dot: '#60a5fa', icon: '🔍' },
@@ -32,7 +32,7 @@ export default function VisaStatus() {
   const [initiating,     setInitiating]     = useState(false);
   const [initError,      setInitError]      = useState('');
 
-  // ── Load visa list ──────────────────────────────────────────────────────────
+  // ── Load visa list ─────────────────────────────────────────────────────────
   const load = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -52,7 +52,7 @@ export default function VisaStatus() {
     load();
   }, [authLoading, isAuthenticated, user?.email, load]);
 
-  // ── Initiate checkout session ───────────────────────────────────────────────
+  // ── Initiate checkout session ──────────────────────────────────────────────
   const handlePayNow = async (item) => {
     setCheckoutTarget(item);
     setInitiating(true);
@@ -73,7 +73,7 @@ export default function VisaStatus() {
     }
   };
 
-  // ── After successful payment ────────────────────────────────────────────────
+  // ── After successful payment ───────────────────────────────────────────────
   const handlePaymentSuccess = () => {
     setSession(null);
     setCheckoutTarget(null);
@@ -87,7 +87,7 @@ export default function VisaStatus() {
     setInitError('');
   };
 
-  // ── Render ──────────────────────────────────────────────────────────────────
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="space-y-4 text-beige" dir="rtl">
       {/* Header */}
@@ -121,7 +121,7 @@ export default function VisaStatus() {
 
       {loading ? (
         <Card className="flex items-center justify-center text-sm text-beige/70">
-          جارٍ تحميل الطلبات...
+          جارِ تحميل الطلبات...
         </Card>
       ) : list.length ? (
         <div className="grid gap-4 md:grid-cols-2">
@@ -204,7 +204,7 @@ export default function VisaStatus() {
                       }}
                     >
                       {isPaying ? (
-                        <>⏳ جارٍ الفتح…</>
+                        <>⏳ جارِ الفتح…</>
                       ) : (
                         <>💳 ادفع الآن</>
                       )}

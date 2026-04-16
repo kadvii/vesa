@@ -21,14 +21,11 @@ function LandingRedirect() {
 }
 
 const agentMenuBase = [
-  { key: 'home',        label: 'الرئيسية',           to: '/dashboard',                icon: null },
-  { key: 'visa-book',   label: 'حجز فيزا',            to: '/dashboard/visa-booking',   icon: null },
-  { key: 'visa-status', label: 'متابعة طلباتي',       to: '/dashboard/visa-status',    icon: null },
-  { key: 'prices',      label: 'إدارة الأسعار',       to: '/dashboard/prices',         icon: null },
-  { key: 'offers',      label: 'العروض',              to: '/dashboard/offers',         icon: null },
-  { key: 'docs',        label: 'الوثائق المطلوبة',    to: '/dashboard/documents',      icon: null },
-  { key: 'countries',   label: 'الدول المتاحة',       to: '/dashboard/countries',      icon: null },
-  { key: 'bookings',    label: 'الحجوزات',            to: '/dashboard/bookings',       icon: null },
+  { key: 'home',        label: 'لوحة التحكم',             to: '/dashboard',                icon: null },
+  { key: 'visa-status', label: 'طلبات الفيزا',             to: '/dashboard/visa-status',    icon: null },
+  { key: 'agents',      label: 'إدارة الوكلاء',           to: '/dashboard/prices',         icon: null },
+  { key: 'users',       label: 'المستخدمين',              to: '/dashboard/documents',      icon: null },
+  { key: 'settings',    label: 'الإعدادات',               to: '/dashboard/countries',      icon: null },
 ];
 
 function AppRoutes() {

@@ -18,7 +18,7 @@ const ACCEPTED_TYPES = '.jpg,.jpeg,.png,.pdf';
 // Max 5 MB — mirrors the backend guard
 const MAX_BYTES = 5 * 1024 * 1024;
 
-// ── Phase indicators ────────────────────────────────────────────────────────
+// ── Phase indicators ─────────────────────────────────────────────────────────
 const PHASE = {
   IDLE:       'idle',       // form not yet submitted
   SUBMITTING: 'submitting', // step 1 — creating the visa application
@@ -48,7 +48,7 @@ export default function VisaBooking() {
 
   const minDate = useMemo(() => new Date().toISOString().split('T')[0], []);
 
-  // ── Validation ────────────────────────────────────────────────────────────
+  // ── Validation ─────────────────────────────────────────────────────────────
   const validate = () => {
     const next = {};
     if (!form.fullName.trim())    next.fullName    = 'الاسم الكامل مطلوب';
@@ -72,7 +72,7 @@ export default function VisaBooking() {
     return Object.keys(next).length === 0;
   };
 
-  // ── File picker handler ───────────────────────────────────────────────────
+  // ── File picker handler ────────────────────────────────────────────────────
   const handleFileChange = (e) => {
     const file = e.target.files?.[0] ?? null;
     setPassportFile(file);
@@ -91,12 +91,12 @@ export default function VisaBooking() {
     }
   };
 
-  // ── Two-phase submit ──────────────────────────────────────────────────────
+  // ── Two-phase submit ───────────────────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
-    // ── Phase 1: create the visa application (JSON) ──────────────────────
+    // ── Phase 1: create the visa application (JSON) ──────────────────────────
     setPhase(PHASE.SUBMITTING);
     let visa;
     try {
@@ -107,7 +107,7 @@ export default function VisaBooking() {
       return;
     }
 
-    // ── Phase 2: upload the passport scan (multipart) ────────────────────
+    // ── Phase 2: upload the passport scan (multipart) ────────────────────────
     setPhase(PHASE.UPLOADING);
     let doc;
     try {
@@ -127,10 +127,10 @@ export default function VisaBooking() {
     setPhase(PHASE.DONE);
   };
 
-  // ── Derived state ─────────────────────────────────────────────────────────
+  // ── Derived state ──────────────────────────────────────────────────────────
   const isLoading = phase === PHASE.SUBMITTING || phase === PHASE.UPLOADING;
 
-  // ── Success screen ────────────────────────────────────────────────────────
+  // ── Success screen ─────────────────────────────────────────────────────────
   if (phase === PHASE.DONE) {
     return (
       <div className="space-y-6 text-beige">
@@ -183,7 +183,7 @@ export default function VisaBooking() {
     );
   }
 
-  // ── Main form ─────────────────────────────────────────────────────────────
+  // ── Main form ──────────────────────────────────────────────────────────────
   return (
     <div className="space-y-6 text-beige">
       {/* Header */}
@@ -197,7 +197,7 @@ export default function VisaBooking() {
         {/* Phase progress badge */}
         {phase !== PHASE.IDLE && (
           <span className="badge bg-brand/20 text-brand border border-brand/40 animate-pulse text-xs px-3 py-1 rounded-full">
-            {phase === PHASE.SUBMITTING ? '⏳ جارٍ إنشاء الطلب…' : '📤 جارٍ رفع الجواز…'}
+            {phase === PHASE.SUBMITTING ? '⏳ جارِ إنشاء الطلب…' : '📤 جارِ رفع الجواز…'}
           </span>
         )}
       </div>
@@ -205,7 +205,7 @@ export default function VisaBooking() {
       <Card className="space-y-4">
         <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
 
-          {/* ── Text fields ─────────────────────────────────── */}
+          {/* ── Text fields ─────────────────────────────────────── */}
           <Input
             label="الاسم الكامل"
             value={form.fullName}
@@ -267,7 +267,7 @@ export default function VisaBooking() {
             </select>
           </label>
 
-          {/* ── Passport file upload ─────────────────────────── */}
+          {/* ── Passport file upload ────────────────────────────── */}
           <div className="md:col-span-2">
             <p className="text-sm font-semibold text-beige/90 mb-2">
               صورة جواز السفر <span className="text-danger">*</span>
@@ -325,18 +325,18 @@ export default function VisaBooking() {
             )}
           </div>
 
-          {/* ── Submit error ─────────────────────────────────── */}
+          {/* ── Submit error ────────────────────────────────────── */}
           {errors.submit && (
             <div className="md:col-span-2 rounded-xl border border-danger/40 bg-danger/15 px-4 py-3 text-sm font-semibold text-danger">
               {errors.submit}
             </div>
           )}
 
-          {/* ── Footer ──────────────────────────────────────── */}
+          {/* ── Footer ──────────────────────────────────────────── */}
           <div className="md:col-span-2 flex items-center justify-between flex-wrap gap-3">
             <p className="text-sm text-beige/70">يتم مراجعة الطلب خلال 24–48 ساعة.</p>
             <Button type="submit" loading={isLoading} disabled={isLoading}>
-              {phase === PHASE.UPLOADING ? 'جارٍ رفع الجواز…' : 'إرسال الطلب'}
+              {phase === PHASE.UPLOADING ? 'جارِ رفع الجواز…' : 'إرسال الطلب'}
             </Button>
           </div>
 

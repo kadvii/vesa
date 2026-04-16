@@ -64,7 +64,7 @@ export default function Home() {
           <p className="text-sm font-semibold text-brand">مرحباً {user?.name || 'بك'} في Visa Z</p>
           <h2 className="text-2xl font-display font-semibold text-beige">منصة الفيزا الإلكترونية الحكومية</h2>
           <p className="text-sm text-beige/70">
-            احجز فيزا إلكترونية، تابع حالتها، وأدِر حجوزات الدولار في لوحة واحدة بتجربة عربية احترافية.
+            احجز فيزا إلكترونية، تابع حالتها، وأدر حجوزات الدولار في لوحة واحدة بتجربة عربية احترافية.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -117,7 +117,7 @@ export default function Home() {
 
           <div className="space-y-3">
             {loading && (
-              <p className="py-4 text-center text-sm text-beige/50">جارٍ التحميل…</p>
+              <p className="py-4 text-center text-sm text-beige/50">جارِ التحميل…</p>
             )}
             {!loading && !error && recent.length === 0 && (
               <p className="py-4 text-center text-sm text-beige/50">لا توجد طلبات حديثة.</p>

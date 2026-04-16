@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 
 const ROLE_CAN_SEE_STATS = ['Admin', 'Employee'];
 
+const ROLE_MAP = { User: 'مستخدم', Admin: 'مدير', Agent: 'وكيل', Employee: 'موظف' };
+
 export default function Dashboard() {
   const { user } = useAuth();
   const canSeeStats = user && ROLE_CAN_SEE_STATS.includes(user.role);
@@ -28,7 +30,7 @@ export default function Dashboard() {
       <div>
         <p className="text-sm font-semibold text-brand">الرئيسية</p>
         <h1 className="text-2xl font-display font-semibold text-beige">
-          {canSeeStats ? 'لوحة التحكم — Visa Z' : `مرحباً، ${user?.name || 'بك'} 👋`}
+          {canSeeStats ? 'لوحة التحكم — Visa Z' : `مرحباً بك، ${user?.name || 'وكيلنا العزيز'} 👋`}
         </h1>
         <p className="text-sm text-beige/70">
           {canSeeStats
@@ -72,7 +74,7 @@ export default function Dashboard() {
         <div className="grid gap-4 sm:grid-cols-2">
           <Card className="bg-base/60 space-y-1">
             <p className="text-sm text-beige/70">الدور</p>
-            <p className="text-xl font-bold text-brand">{user?.role || '—'}</p>
+            <p className="text-xl font-bold text-brand">{ROLE_MAP[user?.role] || user?.role || '—'}</p>
           </Card>
           <Card className="bg-base/60 space-y-1">
             <p className="text-sm text-beige/70">البريد الإلكتروني</p>

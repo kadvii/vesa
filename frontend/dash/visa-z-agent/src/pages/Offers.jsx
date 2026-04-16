@@ -4,8 +4,8 @@ import Button from '../components/Button';
 import ComingSoon from '../components/ComingSoon';
 
 const initialOffers = [
-  { id: 'off-1', title: 'خصم 15% لتركيا', desc: 'يستمر حتى نهاية الشهر' },
-  { id: 'off-2', title: 'فيزا الإمارات 130$', desc: 'عرض محدود 7 أيام' },
+  { id: 'off-1', title: 'Ø®ØµÙ… 15% Ù„ØªØ±ÙƒÙŠØ§', desc: 'ÙŠØ³ØªÙ…Ø± Ø­ØªÙ‰ Ù†Ù‡Ø§ÙŠØ© Ø§Ù„Ø´Ù‡Ø±' },
+  { id: 'off-2', title: 'ÙÙŠØ²Ø§ Ø§Ù„Ø¥Ù…Ø§Ø±Ø§Øª 130$', desc: 'Ø¹Ø±Ø¶ Ù…Ø­Ø¯ÙˆØ¯ 7 Ø£ÙŠØ§Ù…' },
 ];
 
 export default function Offers() {
@@ -24,31 +24,31 @@ export default function Offers() {
   };
 
   return (
-    <ComingSoon label="العروض والخصومات">
+    <ComingSoon label="Ø§Ù„Ø¹Ø±ÙˆØ¶ ÙˆØ§Ù„Ø®ØµÙˆÙ…Ø§Øª">
     <div className="space-y-4 text-beige">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-brand">العروض</p>
-          <h1 className="text-2xl font-display font-semibold text-beige">إدارة الخصومات والعروض</h1>
+          <p className="text-sm font-semibold text-brand">Ø§Ù„Ø¹Ø±ÙˆØ¶</p>
+          <h1 className="text-2xl font-display font-semibold text-beige">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø®ØµÙˆÙ…Ø§Øª ÙˆØ§Ù„Ø¹Ø±ÙˆØ¶</h1>
         </div>
-        <Button onClick={addOffer}>حفظ</Button>
+        <Button onClick={addOffer}>Ø­ÙØ¸</Button>
       </div>
 
       <Card className="space-y-3">
         <form className="grid gap-3 md:grid-cols-3" onSubmit={addOffer}>
           <input
             className="rounded-xl border border-beige/30 bg-surface px-3 py-2 text-sm text-beige outline-none focus:border-brand"
-            placeholder="عنوان العرض"
+            placeholder="Ø¹Ù†ÙˆØ§Ù† Ø§Ù„Ø¹Ø±Ø¶"
             value={form.title}
             onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))}
           />
           <input
             className="rounded-xl border border-beige/30 bg-surface px-3 py-2 text-sm text-beige outline-none focus:border-brand"
-            placeholder="وصف مختصر"
+            placeholder="ÙˆØµÙ Ù…Ø®ØªØµØ±"
             value={form.desc}
             onChange={(e) => setForm((p) => ({ ...p, desc: e.target.value }))}
           />
-          <Button type="submit">إضافة عرض</Button>
+          <Button type="submit">Ø¥Ø¶Ø§ÙØ© Ø¹Ø±Ø¶</Button>
         </form>
       </Card>
 
@@ -61,7 +61,7 @@ export default function Offers() {
                 <p className="text-sm text-beige/70">{o.desc}</p>
               </div>
               <Button variant="ghost" className="text-danger" onClick={() => removeOffer(o.id)}>
-                حذف
+                Ø­Ø°Ù
               </Button>
             </div>
           </Card>

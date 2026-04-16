@@ -10,7 +10,7 @@ export default function ProtectedRoute() {
       <div className="flex min-h-screen items-center justify-center bg-base text-beige">
         <div className="flex items-center gap-3 rounded-2xl bg-surface/80 px-6 py-4 shadow-card">
           <span className="h-4 w-4 animate-spin rounded-full border-2 border-brand/30 border-t-brand" />
-          <span className="text-sm font-semibold">جاري التحقق من الجلسة...</span>
+          <span className="text-sm font-semibold">Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø§Ù„Ø¬Ù„Ø³Ø©...</span>
         </div>
       </div>
     );

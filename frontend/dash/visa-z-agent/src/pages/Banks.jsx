@@ -1,21 +1,21 @@
 const banks = [
-  { code: 'CBI', name: 'البنك المركزي العراقي', url: 'https://cbi.iq', city: 'بغداد', type: 'حكومي' },
-  { code: 'RAF', name: 'مصرف الرافدين', url: 'http://rafidain-bank.gov.iq', city: 'بغداد', type: 'حكومي' },
-  { code: 'RSH', name: 'مصرف الرشيد', url: 'https://rashidbank.gov.iq', city: 'بغداد', type: 'حكومي' },
-  { code: 'TBI', name: 'المصرف العراقي للتجارة', url: 'https://tbi.com.iq', city: 'بغداد', type: 'تجاري' },
-  { code: 'BOB', name: 'مصرف بغداد', url: 'https://bankofbaghdad.com', city: 'بغداد', type: 'تجاري' },
-  { code: 'KIB', name: 'مصرف كردستان الدولي', url: 'https://www.kib.iq', city: 'أربيل', type: 'إقليمي' },
-  { code: 'CIH', name: 'مصرف جيهان', url: 'https://cihanbank.com', city: 'أربيل', type: 'إقليمي' },
+  { code: 'CBI', name: 'Ø§Ù„Ø¨Ù†Ùƒ Ø§Ù„Ù…Ø±ÙƒØ²ÙŠ Ø§Ù„Ø¹Ø±Ø§Ù‚ÙŠ', url: 'https://cbi.iq', city: 'Ø¨ØºØ¯Ø§Ø¯', type: 'Ø­ÙƒÙˆÙ…ÙŠ' },
+  { code: 'RAF', name: 'Ù…ØµØ±Ù Ø§Ù„Ø±Ø§ÙØ¯ÙŠÙ†', url: 'http://rafidain-bank.gov.iq', city: 'Ø¨ØºØ¯Ø§Ø¯', type: 'Ø­ÙƒÙˆÙ…ÙŠ' },
+  { code: 'RSH', name: 'Ù…ØµØ±Ù Ø§Ù„Ø±Ø´ÙŠØ¯', url: 'https://rashidbank.gov.iq', city: 'Ø¨ØºØ¯Ø§Ø¯', type: 'Ø­ÙƒÙˆÙ…ÙŠ' },
+  { code: 'TBI', name: 'Ø§Ù„Ù…ØµØ±Ù Ø§Ù„Ø¹Ø±Ø§Ù‚ÙŠ Ù„Ù„ØªØ¬Ø§Ø±Ø©', url: 'https://tbi.com.iq', city: 'Ø¨ØºØ¯Ø§Ø¯', type: 'ØªØ¬Ø§Ø±ÙŠ' },
+  { code: 'BOB', name: 'Ù…ØµØ±Ù Ø¨ØºØ¯Ø§Ø¯', url: 'https://bankofbaghdad.com', city: 'Ø¨ØºØ¯Ø§Ø¯', type: 'ØªØ¬Ø§Ø±ÙŠ' },
+  { code: 'KIB', name: 'Ù…ØµØ±Ù ÙƒØ±Ø¯Ø³ØªØ§Ù† Ø§Ù„Ø¯ÙˆÙ„ÙŠ', url: 'https://www.kib.iq', city: 'Ø£Ø±Ø¨ÙŠÙ„', type: 'Ø¥Ù‚Ù„ÙŠÙ…ÙŠ' },
+  { code: 'CIH', name: 'Ù…ØµØ±Ù Ø¬ÙŠÙ‡Ø§Ù†', url: 'https://cihanbank.com', city: 'Ø£Ø±Ø¨ÙŠÙ„', type: 'Ø¥Ù‚Ù„ÙŠÙ…ÙŠ' },
 ];
 
 export default function Banks() {
   return (
     <section className="space-y-4">
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-semibold text-brand">البنوك المعتمدة</p>
-        <h1 className="text-2xl font-display font-semibold text-slate-900">قائمة المصارف وروابطها</h1>
+        <p className="text-sm font-semibold text-brand">Ø§Ù„Ø¨Ù†ÙˆÙƒ Ø§Ù„Ù…Ø¹ØªÙ…Ø¯Ø©</p>
+        <h1 className="text-2xl font-display font-semibold text-slate-900">Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ù…ØµØ§Ø±Ù ÙˆØ±ÙˆØ§Ø¨Ø·Ù‡Ø§</h1>
         <p className="text-sm text-slate-600">
-          القائمة محدثة لأغراض العرض التجريبي. يمكنك زيارة الموقع الرسمي لكل مصرف للتحقق من متطلبات الحجز.
+          Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ù…Ø­Ø¯Ø«Ø© Ù„Ø£ØºØ±Ø§Ø¶ Ø§Ù„Ø¹Ø±Ø¶ Ø§Ù„ØªØ¬Ø±ÙŠØ¨ÙŠ. ÙŠÙ…ÙƒÙ†Ùƒ Ø²ÙŠØ§Ø±Ø© Ø§Ù„Ù…ÙˆÙ‚Ø¹ Ø§Ù„Ø±Ø³Ù…ÙŠ Ù„ÙƒÙ„ Ù…ØµØ±Ù Ù„Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ù…ØªØ·Ù„Ø¨Ø§Øª Ø§Ù„Ø­Ø¬Ø².
         </p>
       </div>
 
@@ -33,11 +33,11 @@ export default function Banks() {
                 <p className="text-xs font-semibold text-beige/70">{bank.code}</p>
                 <h3 className="text-lg font-semibold text-beige">{bank.name}</h3>
                 <p className="text-xs text-beige/60">
-                  {bank.city} · {bank.type}
+                  {bank.city} Â· {bank.type}
                 </p>
               </div>
               <span className="rounded-full bg-base/60 px-3 py-1 text-xs font-semibold text-beige group-hover:bg-brand/20 group-hover:text-brand">
-                زيارة الموقع
+                Ø²ÙŠØ§Ø±Ø© Ø§Ù„Ù…ÙˆÙ‚Ø¹
               </span>
             </div>
           </a>

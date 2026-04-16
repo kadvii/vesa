@@ -41,7 +41,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
 
   const backdropRef = useRef(null);
 
-  // ── Countdown timer ─────────────────────────────────────────────────────────
+  // ── Countdown timer ────────────────────────────────────────────────────────
   useEffect(() => {
     if (!session?.expiresAt) return;
     const tick = () => {
@@ -53,12 +53,12 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
     return () => clearInterval(id);
   }, [session?.expiresAt]);
 
-  // ── Close on backdrop click ─────────────────────────────────────────────────
+  // ── Close on backdrop click ────────────────────────────────────────────────
   const handleBackdropClick = (e) => {
     if (e.target === backdropRef.current) onClose();
   };
 
-  // ── Validation ──────────────────────────────────────────────────────────────
+  // ── Validation ─────────────────────────────────────────────────────────────
   const validate = () => {
     const next = {};
     if (method === 1 || method === 2) {
@@ -74,7 +74,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
     return Object.keys(next).length === 0;
   };
 
-  // ── Submit ──────────────────────────────────────────────────────────────────
+  // ── Submit ─────────────────────────────────────────────────────────────────
   const handlePay = async () => {
     if (!validate()) return;
     if (timeLeft === 0) {
@@ -104,7 +104,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
     }
   };
 
-  // ── Format helpers ──────────────────────────────────────────────────────────
+  // ── Format helpers ─────────────────────────────────────────────────────────
   const fmtAmount = new Intl.NumberFormat('ar-IQ', {
     style: 'currency', currency: session?.currency ?? 'USD', maximumFractionDigits: 2,
   }).format(session?.amount ?? 0);
@@ -121,7 +121,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
     return d.length >= 3 ? `${d.slice(0, 2)}/${d.slice(2)}` : d;
   };
 
-  // ── Render ──────────────────────────────────────────────────────────────────
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div
       ref={backdropRef}
@@ -163,7 +163,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
 
         {/* ── Header ── */}
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-          <div style={{ fontSize: '32px', marginBottom: '6px' }}>🔐</div>
+          <div style={{ fontSize: '32px', marginBottom: '6px' }}>🔒</div>
           <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#d4af37' }}>
             بوابة الدفع الآمن
           </h2>
@@ -191,7 +191,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
               fontSize: '12px', color: timeLeft < 60 ? '#f87171' : '#8899aa',
               fontFamily: 'monospace',
             }}>
-              ⏱ {fmtTime}
+              ⏳ {fmtTime}
             </span>
           )}
         </div>
@@ -225,7 +225,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
         {phase === PHASE.PROCESSING && (
           <div style={{ textAlign: 'center', padding: '32px 0' }}>
             <div style={{ fontSize: '36px', animation: 'spin 1s linear infinite' }}>⏳</div>
-            <p style={{ color: '#8899aa', marginTop: '12px' }}>جارٍ معالجة الدفع…</p>
+            <p style={{ color: '#8899aa', marginTop: '12px' }}>جارِ معالجة الدفع…</p>
             <style>{`@keyframes spin { to { transform:rotate(360deg);} }`}</style>
           </div>
         )}
@@ -374,7 +374,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
             </button>
 
             <p style={{ textAlign: 'center', fontSize: '11px', color: '#555', marginTop: '12px' }}>
-              🔐 جميع المعاملات مشفرة بـ TLS 1.3
+              🔒 جميع المعاملات مشفرة بـ TLS 1.3
             </p>
           </>
         )}
@@ -383,7 +383,7 @@ export default function CheckoutModal({ session, onSuccess, onClose }) {
   );
 }
 
-// ── Style helpers ──────────────────────────────────────────────────────────────
+// ── Style helpers ────────────────────────────────────────────────────────────
 const inputStyle = (hasError) => ({
   width: '100%',
   background: 'rgba(255,255,255,0.05)',

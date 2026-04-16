@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { api } from '../services/api';
 
-/* ─── Status badge colours ──────────────────────────────────────────────── */
+/* ─── Status badge colours ────────────────────────────────────────── */
 const STATUS_CFG = {
   Pending:  { bg: '#f59e0b22', border: '#f59e0b', color: '#fbbf24', label: 'قيد الانتظار' },
   Approved: { bg: '#10b98122', border: '#10b981', color: '#34d399', label: 'مقبول'        },
@@ -13,7 +13,7 @@ const VISA_TYPE_AR = {
   Work: 'عمل', Transit: 'عبور', Medical: 'علاجية',
 };
 
-/* ─── Modal ─────────────────────────────────────────────────────────────── */
+/* ─── Modal ───────────────────────────────────────────────────────── */
 function ConfirmModal({ item, action, onConfirm, onCancel }) {
   const [notes, setNotes] = useState('');
   const isApprove = action === 'Approved';
@@ -60,7 +60,7 @@ function ConfirmModal({ item, action, onConfirm, onCancel }) {
   );
 }
 
-/* ─── Toast ─────────────────────────────────────────────────────────────── */
+/* ─── Toast ───────────────────────────────────────────────────────── */
 function Toast({ msg, type }) {
   if (!msg) return null;
   const bg = type === 'error' ? '#7f1d1d' : '#064e3b';
@@ -72,7 +72,7 @@ function Toast({ msg, type }) {
   );
 }
 
-/* ─── Status Badge ──────────────────────────────────────────────────────── */
+/* ─── Status Badge ────────────────────────────────────────────────── */
 function Badge({ status }) {
   const cfg = STATUS_CFG[status] || STATUS_CFG.Pending;
   return (
@@ -86,7 +86,7 @@ function Badge({ status }) {
   );
 }
 
-/* ─── Main Component ────────────────────────────────────────────────────── */
+/* ─── Main Component ──────────────────────────────────────────────── */
 export default function AdminVisaQueue() {
   const [items,    setItems]    = useState([]);
   const [loading,  setLoading]  = useState(true);
@@ -155,7 +155,7 @@ export default function AdminVisaQueue() {
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
-  /* ─────────────────────── RENDER ─────────────────────── */
+  /* ───────────────────── RENDER ───────────────────── */
   return (
     <div style={styles.root} dir="rtl">
       {/* ── Header ── */}
@@ -177,7 +177,7 @@ export default function AdminVisaQueue() {
         <input
           id="admin-search"
           style={styles.searchInput}
-          placeholder="🔍  بحث بالاسم أو الرقم المرجعي…"
+          placeholder="🔍 بحث بالاسم أو الرقم المرجعي…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -292,7 +292,7 @@ export default function AdminVisaQueue() {
   );
 }
 
-/* ─── StatChip ──────────────────────────────────────────────────────────── */
+/* ─── StatChip ────────────────────────────────────────────────────── */
 function StatChip({ label, count, color }) {
   return (
     <div style={{ textAlign: 'center', background: '#1e293b', border: `1px solid ${color}33`, borderRadius: 12, padding: '8px 20px', minWidth: 70 }}>
@@ -302,7 +302,7 @@ function StatChip({ label, count, color }) {
   );
 }
 
-/* ─── Styles ────────────────────────────────────────────────────────────── */
+/* ─── Styles ──────────────────────────────────────────────────────── */
 const styles = {
   root: {
     minHeight: '100vh',
@@ -423,7 +423,7 @@ const styles = {
   },
 };
 
-/* ─── CSS animation injection ────────────────────────────────────────────── */
+/* ─── CSS animation injection ─────────────────────────────────────── */
 if (typeof document !== 'undefined' && !document.getElementById('admin-queue-anim')) {
   const s = document.createElement('style');
   s.id = 'admin-queue-anim';
