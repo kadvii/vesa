@@ -51,7 +51,12 @@ builder.Services.AddRateLimiter(options =>
 });
 
 // ─── Controllers ─────────────────────────────────────────────────────────────
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // يضمن هذا الإعداد عدم ترميز الحروف غير اللاتينية (مثل العربية) إلى رموز Script
+        options.JsonSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All);
+    });
 builder.Services.AddMemoryCache();
 builder.Services.AddOutputCache();
 
